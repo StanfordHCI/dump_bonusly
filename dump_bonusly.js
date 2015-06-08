@@ -6,9 +6,18 @@
   fs = require('fs');
   API_KEY = getsecret('bonusly_api_key');
   b = new bonusly(API_KEY);
-  b.bonuses.getAll({}).then(function(results){
-    console.log(results);
-    fs.writeFileSync('bonusly_data.json', JSON.stringify(results, null, 2));
-    return console.log('done writing');
+  b.bonuses.getAll({
+    limit: 9999999999999
+  }).then(function(badge_results){
+    console.log(badge_results);
+    fs.writeFileSync('bonusly_badges.json', JSON.stringify(badge_results, null, 2));
+    console.log('done writing badges');
+    return b.users.getAll({
+      limit: 9999999999999
+    }).then(function(user_results){
+      console.log(user_results);
+      fs.writeFileSync('bonusly_users.json', JSON.stringify(user_results, null, 2));
+      return console.log('done writing users');
+    });
   });
 }).call(this);

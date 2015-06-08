@@ -1,3 +1,5 @@
 .getsecret.yaml
 node_modules
-bonusly_data.json
+bonusly_badges.json
+bonusly_users.json
+.DS_Store

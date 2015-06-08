@@ -22,4 +22,4 @@ Now run the script:
 node dump_bonusly.js
 ```
 
-Your badges will be in `bonusly_data.json`
+Your badges will be in `bonusly_badges.json` and user data will be in `bonusly_users.json`
