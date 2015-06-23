@@ -49,3 +49,4 @@ score_and_username = [(score,username) for username,score in pagerank_results.it
 
 for score,username in sorted(score_and_username, reverse=True):
   print username, 'score=' + str(score), 'received=' + str(user_to_num_badges[username]), 'given=' + str(user_to_num_given[username])
+  print

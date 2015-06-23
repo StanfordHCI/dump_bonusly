@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/gkovacs/dump_bonusly",
   "dependencies": {
+    "asyncblock": "^2.1.24",
     "bonusly": "git+https://github.com/gkovacs/bonusly-node.git",
     "getsecret": "^1.0.1"
   }
