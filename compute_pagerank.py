@@ -48,5 +48,5 @@ pagerank_results = nx.algorithms.link_analysis.pagerank_alg.pagerank(G, alpha=0.
 score_and_username = [(score,username) for username,score in pagerank_results.items()]
 
 for score,username in sorted(score_and_username, reverse=True):
-  print username, 'score=' + str(score), 'received=' + str(user_to_num_badges[username]), 'given=' + str(user_to_num_given[username])
+  print username.encode('utf-8'), 'score=' + str(score), 'received=' + str(user_to_num_badges[username]), 'given=' + str(user_to_num_given[username])
   print

@@ -22,10 +22,10 @@ asyncblock (flow) ->
     badge_results = flow.sync b.bonuses.getAll({limit: 100, skip: all_badges.length}).then fcback()
     console.log 'got badges'
     console.log badge_results.data.result.length
-    if badge_results.data.result.length < 100
-      break
     for badge in badge_results.data.result
       all_badges.push badge
+    if badge_results.data.result.length < 100
+      break
   all_badge_results = {data: {result: all_badges}}
   fs.writeFileSync 'bonusly_badges.json', JSON.stringify(all_badge_results, null, 2)
   console.log 'done writing badges'
