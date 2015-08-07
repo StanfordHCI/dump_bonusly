@@ -26,12 +26,12 @@
       }).then(fcback()));
       console.log('got badges');
       console.log(badge_results.data.result.length);
-      if (badge_results.data.result.length < 100) {
-        break;
-      }
       for (i$ = 0, len$ = (ref$ = badge_results.data.result).length; i$ < len$; ++i$) {
         badge = ref$[i$];
         all_badges.push(badge);
+      }
+      if (badge_results.data.result.length < 100) {
+        break;
       }
     }
     all_badge_results = {
