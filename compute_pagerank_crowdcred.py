@@ -66,4 +66,4 @@ for score,username in sorted(score_and_username, reverse=True):
   voters = {}
   if username in who_voted_for_each_user:
     voters = who_voted_for_each_user[username]
-  print username.encode('utf-8'), 'score=' + str(score), 'voters=' + str(pretty_floats(voters))
+  print username.encode('utf-8'), 'score=' + str(score), 'voters=' + str(pretty_floats(sorted(voters.items())))
