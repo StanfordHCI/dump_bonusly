@@ -25,12 +25,18 @@ def normalize_dict_values(d):
     output[k] = float(v) / sum_vals
   return output
 
+overrides = {}
+
 def to_weighted_edges(csv_lines, all_usernames):
   weighted_edges = []
   for line in csv_lines:
     username = line['Choose your Slack username']
     given_to_others = {}
+    if username in overrides:
+      given_to_others = overrides[username]
     for target_user in all_usernames:
+      if username in overrides:
+        break
       if target_user == username:
         continue
       if line[target_user] == '':
@@ -47,7 +53,7 @@ def to_weighted_edges(csv_lines, all_usernames):
   return weighted_edges
 
 csv_lines = csv.DictReader(open('crowdcred.csv'))
-all_usernames = [x for x in csv_lines.fieldnames if x not in ['rajanvaish', 'michaelbernstein', 'geza', '\xe6\x97\xb6\xe9\x97\xb4\xe6\x88\xb3\xe8\xae\xb0', 'Choose your Slack username', 'Please enter your email id, using which you signed up for Slack', 'Please enter your email id that you want should go in the paper', 'Please enter your current affiliation that you want should go in the paper', 'What has been your prime contribution? ', 'How many weeks have you been mostly active? ', 'What was your prime metric of evaluation or score distribution? ', 'abhilash', 'Please enter your Github id']]
+all_usernames = [x for x in csv_lines.fieldnames if x not in ['rajanvaish', 'michaelbernstein', 'geza', '\xe6\x97\xb6\xe9\x97\xb4\xe6\x88\xb3\xe8\xae\xb0', 'Choose your Slack username', 'Please enter your email id, using which you signed up for Slack', 'Please enter your email id that you want should go in the paper', 'Please enter your current affiliation that you want should go in the paper', 'What has been your prime contribution? ', 'How many weeks have you been mostly active? ', 'What was your prime metric of evaluation or score distribution? ', 'Please enter your Github id']]
 weighted_edges = to_weighted_edges(csv_lines, all_usernames)
 
 who_voted_for_each_user = {}
