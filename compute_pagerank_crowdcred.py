@@ -27,19 +27,17 @@ def normalize_dict_values(d):
 
 def robinhood(d, all_usernames):
   threshold = 0.15
-  output = {}
+  output = Counter()
   for k,v in d.items():
     if v > threshold:
       excess = v - threshold
-      output[k] = threshold
+      output[k] += threshold
       ration_per_user = excess / float(len(all_usernames))
       for other_username in all_usernames:
-        if other_username not in output:
-          output[other_username] = 0
         output[other_username] += ration_per_user
     else:
-      output[k] = v
-  return output
+      output[k] += v
+  return dict(output)
 
 overrides = {}
 
@@ -89,4 +87,5 @@ for score,username in sorted(score_and_username, reverse=True):
   voters = {}
   if username in who_voted_for_each_user:
     voters = who_voted_for_each_user[username]
-  print username.encode('utf-8'), 'score=' + str(score), 'voters=' + str(pretty_floats(sorted(voters.items())))
+  print username.encode('utf-8'), 'score=' + str(score) #, 'voters=' + str(pretty_floats(sorted(voters.items())))
+  print ''
