@@ -25,6 +25,22 @@ def normalize_dict_values(d):
     output[k] = float(v) / sum_vals
   return output
 
+def robinhood(d, all_usernames):
+  threshold = 0.15
+  output = {}
+  for k,v in d.items():
+    if v > threshold:
+      excess = v - threshold
+      output[k] = threshold
+      ration_per_user = excess / float(len(all_usernames))
+      for other_username in all_usernames:
+        if other_username not in output:
+          output[other_username] = 0
+        output[other_username] += ration_per_user
+    else:
+      output[k] = v
+  return output
+
 overrides = {}
 
 def to_weighted_edges(csv_lines, all_usernames):
@@ -48,6 +64,7 @@ def to_weighted_edges(csv_lines, all_usernames):
     if len(given_to_others) == 0:
       continue
     given_to_others = normalize_dict_values(given_to_others)
+    given_to_others = robinhood(given_to_others, all_usernames)
     for target_user,value_given in given_to_others.items():
       weighted_edges.append((username, target_user, value_given))
   return weighted_edges
